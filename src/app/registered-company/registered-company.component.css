@@ -1,0 +1,22 @@
+.bxs-edit:hover {
+    color: #008774;
+  }
+
+  .bxs-trash-alt:hover {
+    color: rgb(224, 3, 3); 
+  }
+
+ .table-block{
+    margin:20px 0px 0px 0px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding:20px;
+    border-radius: 10px;
+}
+a{
+  color: black;
+  font-weight: 300;
+}
+a:hover{
+  color:#008774;
+  font-weight: 500;
+}

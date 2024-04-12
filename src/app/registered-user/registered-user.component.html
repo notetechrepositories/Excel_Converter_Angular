@@ -1,0 +1,45 @@
+
+<div class="wrapper">
+    <div class="col-md-12 ml-2">
+        <span><a routerLink="/admin-dashboard" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">Home</a> /</span>
+        <span class="active-nav"> Registered Users</span>
+    </div>
+    <div class="table-block">
+        <div class="col-12 ">
+            <h2 class="col-md-6 mb-5">Registered User</h2>
+            <p-table  [value]="userDetails" styleClass="p-datatable-striped" [tableStyle]="{ 'min-width': '55rem' }"
+                [paginator]="true" [rows]="10">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width:20%">Name</th>
+                        <th style="width:20%">Company Name</th>
+                        <th style="width:20%"> Email</th>
+                        <th style="width:20%">Mobile Number</th>
+                        <th style="width:15%">Admin Privilage</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-user>
+                    <tr>
+                        <td>{{ user.t6_name }}</td>
+                        <td>{{user.company}}</td>
+                        <td>{{ user.t6_email }}</td>
+                        <td>{{ user.t6_mobile_no }}</td>
+                        <td [pEditableColumn]="user.t6_admin" pEditableColumnField="t6_admin" style="cursor: pointer;">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <p-dropdown [options]="statuses" appendTo="body" [(ngModel)]="user.t6_admin" [style]="{'width':'100%'}" (onChange)="updateUserPrivilege(user.id_t6_company_users,$event)"></p-dropdown>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{ user.t6_admin === 'y' ? 'Yes' : 'No' }} <i class="fa fa-pencil" style="margin-left: 60px;color: rgb(203, 205, 206);"></i>
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+
+<p-toast></p-toast>

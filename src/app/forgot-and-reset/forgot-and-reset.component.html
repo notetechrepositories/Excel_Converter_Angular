@@ -1,0 +1,95 @@
+<main>
+    <div class="container  p-4 d-flex justify-content-center align-items-center">
+        <div class="form-container" *ngIf="ForgotPassword">
+            <h3 class="text-center">Forgot Password</h3>
+            <form class="row g-3" (ngSubmit)="onforgotpassword()" [formGroup]="forgotForm">
+                <div>
+                  <div class="col-md-12" [class.error]="forgotForm.controls['emailorphone'].dirty && forgotForm.hasError('required', 'emailorphone')">
+                    <label class="form-label">Email or Phone</label>
+                    <input type="text" class="form-control" formControlName="emailorphone" name="emailorphone" (click)="inputboxClick($event)">
+                    <small *ngIf="forgotForm.controls['emailorphone'].dirty && forgotForm.hasError('required', 'emailorphone')">*Email or Phonenumber is required</small><br>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block mt-3 w-100"
+                          style="background: #008774; border-color: #355a64;">Submit
+                  </button>
+                  <div class="col-md-12 d-flex justify-content-end mt-3 ">
+                    <a style="color: #0fa58f; font-weight: 500;text-decoration: underline;" (click)="backToLogin()">Back to Login</a>
+                  </div>
+                  <div class="error_msg" *ngIf="errorMessageView">
+                    <i class="fa fa-times-circle"></i>&nbsp;{{ errorMessage }}
+                  </div>
+                </div>
+              </form>
+              
+        </div>
+<!-- --------------------------------------------- -->
+        <div class="form-container" *ngIf="VerifyOTP">
+            <h3 class="text-center">Verify OTP</h3>
+            <p class="text-center">Your code was sent to you via email</p>
+          <form class="row g-3" >
+            <div>
+                <div class="otp-field mb-4">
+                    <input type="number" id="first" name="otp1" maxlength="1" [(ngModel)]="otp1" [ngClass]="{'errorbox':iserror}" (keyup)="onOtpInput($event, firstInput1)" #firstInput/>
+                    <input type="number" id="second" name="otp2" maxlength="1" [(ngModel)]="otp2" [ngClass]="{'errorbox':iserror}" (keyup)="onOtpInput($event, firstInput2)" #firstInput1 />
+                    <input type="number" id="third" name="otp3" maxlength="1" [(ngModel)]="otp3" [ngClass]="{'errorbox':iserror}" (keyup)="onOtpInput($event, firstInput3)" #firstInput2 />
+                    <input type="number" id="fourth" name="otp4" maxlength="1" [(ngModel)]="otp4" [ngClass]="{'errorbox':iserror}" (keyup)="onOtpInput($event, firstInput3)" #firstInput3 />
+                  </div>
+
+                  <p class="otp-timer" *ngIf="remainingTime | async as remainingTime">
+                    Enter OTP in<span> {{ remainingTime }} </span>seconds
+                  </p>
+              <button type="submit" class="btn btn-primary btn-block mt-4 w-100"
+                style="background: #008774; border-color: #355a64;" (click)="onVerifyOTP()" [disabled]="isVerifyDisabled">Verify
+                </button>
+
+                <p class="resend-otp" (click)="onResendOTP()" *ngIf="showResend">Resend OTP</p>
+                <div class="error_msg" *ngIf="errorMessageView">
+                    <i class="fa fa-times-circle"></i>&nbsp;{{ errorMessage }}
+                  </div>
+            </div>
+          </form>
+        </div>
+<!-- ------------------------------------------------- -->
+
+        <div class="form-container" *ngIf="ResetPassword">
+            <h3 class="text-center">Reset Password</h3>
+          <form class="row g-3" [formGroup]="resetForm" (ngSubmit)="resetPassword()">
+            <div>
+                <div class="col-md-12" [class.error]="resetForm.controls['password'].dirty && resetForm.hasError('required','password')">
+                    <label for="inputPassword4" class="form-label">Password</label>
+                    <div class="input-group">
+                      <input [type]="type" class="form-control" formControlName="password" name="t6_login_pin" (click)="inputboxClick($event)" >
+                      <span class="input-group-text" (click)="hideShowPassword()">
+                        <i class="fa {{eyeIcon}}" aria-hidden="true"></i>
+                      </span>
+                    </div>
+                    <small style="float:left;margin-top:2px;" *ngIf="resetForm.controls['password'].dirty && resetForm.hasError('required','password')">*Password is required</small>
+                  </div> 
+          
+                  <div class="col-md-12" [class.error]="resetForm.controls['newpassword'].dirty && resetForm.hasError('required','newpassword')">
+                    <label for="inputPassword4" class="form-label">Confirm Password</label>
+                    <div class="input-group">
+                      <input type="password" class="form-control" formControlName="newpassword" (click)="inputboxClick($event)" >
+                    </div>  
+                    <small style="float:left;margin-top:2px;" *ngIf="resetForm.controls['newpassword'].dirty && resetForm.hasError('required','newpassword')">*Password is required</small>
+                    <small style="float:left;margin-top:2px;" *ngIf="resetForm.controls['newpassword'].dirty && resetForm.controls['newpassword'].value && resetForm.hasError('mismatch', 'newpassword')">Passwords do not match</small>
+                    <small style="float:left;margin-top:2px;" class="text-success" *ngIf="!resetForm.hasError('required','newpassword') && !resetForm.hasError('mismatch', 'newpassword') && resetForm.controls['newpassword'].dirty && resetForm.controls['newpassword'].valid && resetForm.controls['password'].value">Passwords match</small>
+                  </div>
+              <button type="submit" class="btn btn-primary btn-block mt-4 w-100"
+                style="background: #008774; border-color: #355a64;">Submit
+              </button>
+              
+            </div>
+          </form>
+        </div>
+
+        
+      </div>
+      
+</main>
+
+<div class="progress-spinner" *ngIf="isLoading">
+  <p-progressSpinner></p-progressSpinner>
+</div>
+
+

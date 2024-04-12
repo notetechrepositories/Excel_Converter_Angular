@@ -1,0 +1,214 @@
+<main *ngIf="navigationView">
+
+    <nav class="navbar-container" >
+        <div class="logo-container">
+            <img src="assets\images\STMlogo3.png" alt="" class="site-logo" >
+            <img src="assets\images\NOTETECH LOGO 1 (1).png" alt="" class="logo" >
+        </div>
+        <div class="toggle-bars" (click)="toggleNavMenu()">
+            <div class="togglebar"></div>
+            <div class="togglebar"></div>
+            <div class="togglebar"></div>
+        </div>
+        <ul class="navmenu-items" [ngClass]="{'active': isNavMenuActive}" id="profile-accordion">
+            <li class="nav-link"><a routerLink="/home" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" *ngIf="HomeTab">Home</a></li>
+            <li class="nav-link"><a routerLink="/tutorial-page" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" *ngIf="HowItsWorkTab">How It Works</a></li>
+            <div class="login-register" *ngIf="AddEmployeeButton">
+                <a class="button" (click)="onAddEmployeeButton()"> <i class='bx bx-plus' ></i> ADD EMPLOYEE</a>
+                <a class="button" (click)="onUserListButton()"> USERS LIST</a>
+            </div>
+            <!-- <li (click)="logout()">
+                <i class="bx bx-log-out" style="font-size:30px; color:#009182;font-weight: 300;"></i>
+            </li> -->
+            <li>
+                <label for="profile">
+                    <i class="profileIcon fa-solid fa-user" style="  margin:0 5px;
+                    background-color:#008774;
+                    color:white;
+                    border-radius: 50%;
+                    text-align: center;
+                    padding:10px;"></i>
+                    
+                  </label>
+                  <input type="checkbox" name="profile-accordion" id="profile">
+                  <div class="profile-menu-wrap">
+                    <div class="profile-menu">
+                      <div class="menu-link">
+                        <a routerLink="/profile" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" id="editProfileLink">
+                          <i class="fa-solid fa-user"></i>
+                          <h4> Edit Profile </h4>
+                        </a>
+                        <a href="#">
+                          <i class="fa-solid fa-gear"></i>
+                          <h4> Settings </h4>
+                        </a>
+                        <a href="#">
+                          <i class="fa-solid fa-circle-info"></i>
+                          <h4> Help & Support </h4>
+                        </a>
+                        <a (click)="logout()">
+                          <i class="fa-solid fa-right-from-bracket"></i>
+                          <h4> LogOut </h4>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+              </li>
+              
+              
+        </ul>
+
+    </nav>
+
+<div class="wrapper" style="min-height: 789px;">
+    
+    <router-outlet></router-outlet>
+
+</div>
+   
+
+<footer>
+    <hr class="gradient-line" />
+    <div class="footer-logo-container">
+        <!-- <img src="assets\images\STMlogo3.png" alt="" class="footer-site-logo" > -->
+        <p>STM by notetech.com</p>
+    </div>
+</footer>
+
+
+<!--================= Login PopUp =======================-->
+
+    <p-dialog [(visible)]="loginVisible" [modal]="true" [style]="{ 'width': '450px', 'min-height': '600px'}" [draggable]="false" [resizable]="false">
+        <div>
+            <form class="login-form">
+                <div class="logo-login">
+                    <img src="assets\images\STMlogo3.png" alt="" class="site-logo" >
+                </div>
+                <label for="username">Username</label>
+                <input type="text" id="uname" name="username" placeholder="Username..">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Password..">
+                <p class="p-text1"><a>Forgot Password ?</a></p>
+                <button class="button-37" role="button">LOGIN</button>
+                <p class="p-text2">Don't have an account?<span>SIGN UP</span></p>
+            </form>
+        </div>
+    </p-dialog>
+
+
+<!------------------------- Add Employee Pop Up ----------------------------->
+
+<p-dialog [(visible)]="AddEmployeeVisible"  [modal]="true" [style]="{ 'width': '55rem','padding':'0px 20px 0px 20px','box-shadow':'none'}" [draggable]="false" [resizable]="false">
+    <div >
+        <p-toast></p-toast>
+        <h3 class="text-center mb-4">User Registration</h3> 
+        <form class="row g-3"  [formGroup]="userRegForm"  (ngSubmit)="onAddUser()">
+            <div class="col-md-12">
+                <label class="form-label">Company Name</label>
+                <input type="text" class="form-control" [value]="companyDetails.t5_company_name" [disabled]="true">             
+            </div>
+            <div class="col-md-6">
+                <label  class="form-label">Employee Name</label>
+                <input type="email" class="form-control" formControlName="name" (click)="inputboxClick($event)">
+                <small style="float:left;margin-top:2px;" *ngIf="userRegForm.controls['name'].dirty && userRegForm.hasError('required','name')">*Name is required</small>
+            </div>
+            <div class="col-md-6">
+                <label  class="form-label">Email</label>
+                <input type="text" class="form-control" formControlName="email" (click)="inputboxClick($event)">
+                <small style="float:left;margin-top:2px;" *ngIf="userRegForm.controls['email'].touched && userRegForm.hasError('required','email')">*Email is required</small>
+            </div>
+            <div class="col-md-6">
+                <label  class="form-label">Mobile</label>
+                <input type="text" class="form-control" formControlName="mobile" (keypress)="onlyNumbers($event)" maxlength="10" (click)="inputboxClick($event)">
+                <small style="float:left;margin-top:2px;" *ngIf="userRegForm.controls['mobile'].touched && userRegForm.hasError('required','mobile')">*Mobile number is required</small>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Is the user have Admin Privilege?</label>
+                <select class="form-control" formControlName="adminPrivilege" (click)="inputboxClick($event)">
+                  <option value="y">Yes</option>
+                  <option value="n" selected>No</option>
+                </select>
+                <small style="float:left;margin-top:2px;" *ngIf="userRegForm.controls['adminPrivilege'].touched && userRegForm.hasError('required','adminPrivilege')">*Required</small>
+              </div>
+          
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary btn-block mt-4 w-100 "
+              style="background: #008774; border-color: #355a64;">ADD</button>
+            </div>
+            <div class="error_msg col-md-12" *ngIf="errorMessageView">
+                <i class="fa fa-times-circle"></i>&nbsp;{{ errorMessage }}
+            </div>
+        </form>
+    </div>
+</p-dialog>
+
+<!------------------------- User List Popup -------------------->
+
+<p-dialog [(visible)]="UserListVisible" [modal]="true" [style]="{ width: '80vw', 'min-height': '504px' }" [draggable]="false"
+[resizable]="false">
+<div>
+    <p-toast></p-toast>
+    <h3 class="text-center mb-4">Employee List</h3>
+
+    <p-table #dt [value]="userDetails" [rows]="5" [paginator]="true" [tableStyle]="{ 'min-width': '75rem','margin-top':'20px' }"
+        [(selection)]="selectedUser" [rowHover]="false" dataKey="id" [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+        <!-- <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Manage Connections</h5>
+                <div class="trashButton" style="float:right">
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-danger"
+                        (click)="deleteSelectedUser()"
+                        [disabled]="!selectedUser || !selectedUser.length"></button>
+                </div>
+            </div>
+        </ng-template> -->
+        <ng-template pTemplate="header">
+            <tr>
+                <!-- <th style="width: 4rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th> -->
+                <th pSortableColumn="name" style="width:25%">Name <p-sortIcon field="name"></p-sortIcon></th>
+                <th style="width:25%"> Email</th>
+                <th pSortableColumn="price" style="width:25%">Mobile Number</th>
+                <th style="width:15%">Admin Privilage</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-userDetails>
+            <tr>
+                <!-- <td>
+                    <p-tableCheckbox [value]="userDetails"></p-tableCheckbox>
+                </td> -->
+                <td>{{ userDetails.t6_name }}</td>
+                <td>{{ userDetails.t6_email }}</td>
+                <td>{{ userDetails.t6_mobile_no }}</td>
+                <td [pEditableColumn]="userDetails.t6_admin" pEditableColumnField="t6_admin" style="cursor: pointer;">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <p-dropdown [options]="statuses" appendTo="body" [(ngModel)]="userDetails.t6_admin" [style]="{'width':'100%'}" (onChange)="updateUserPrivilege(userDetails.id_t6_company_users,$event)"></p-dropdown>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ userDetails.t6_admin === 'y' ? 'Yes' : 'No' }} <i class="fa fa-pencil" style="margin-left: 60px;color: rgb(203, 205, 206);"></i>
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td [style]="{'float':'right'}">
+                    <button pButton pRipple icon="pi pi-trash" class="trash-button"
+                        (click)="deleteUser(userDetails)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="warning-msg" style="margin: -2px -4px; color:rgb(211, 9, 9);" *ngIf="errorMessageView">
+                <i class="fa fa-warning" style="color: rgb(211, 9, 9);"></i>&nbsp;{{errorMessage}}
+            </div>
+        </ng-template>
+
+
+    </p-table>
+</div>
+    
+</p-dialog>
+
+</main>

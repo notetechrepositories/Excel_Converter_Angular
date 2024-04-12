@@ -1,0 +1,200 @@
+<div class="wrapper">
+    
+    <div class="card-block row">
+        <div class="active-nav mb-4 float-right">Home</div>
+        <div class="col-md-4 col-xl-3">
+            <div class="card" routerLink="/registered-company"  pTooltip="View all Company" tooltipPosition="bottom">
+                <h2 class="text-right"><img src="src/assets/icons/companyicon.png"></h2>
+                <p class="m-b-0 mt-4">Registered Company<span class="f-right"><h2>{{companyCount}}</h2></span></p>
+            </div>
+        </div>
+        <div class="col-md-4 col-xl-3">
+            <div class="card"  routerLink="/registered-user"  pTooltip="View all Users" tooltipPosition="bottom">
+                <h2 class="text-right"><img src="src/assets/icons/usericon.png"></h2>
+                <p class="m-b-0 mt-4">Registered Users<span class="f-right"><h2>{{userCount}}</h2></span></p>
+            </div>
+        </div>
+        <div class="col-md-4 col-xl-3">
+            <div class="card">
+                <h2 class="text-right"><img src="src/assets/icons/pendingicon.png"></h2>
+                <p class="m-b-0 mt-4">Pending Request<span class="f-right"><h2>{{pendingCount}}</h2></span></p>
+            </div>
+        </div>
+        <div class="col-md-4 col-xl-3">
+            <div class="card">
+                <h5 class="text-center mt-3"><span>{{ currentDate | date:'MMMM d, y' }}</span></h5>
+                <h5 class="text-center"><span>{{ currentDate | date:'EEEE' }}</span></h5>
+                <p class="m-b-0 mt-2"><span><h1 class="time text-center">{{currentTime}}</h1></span></p>
+            </div>
+        </div>
+    </div>
+
+    <button class="button-88" role="button" (click)="onAddCompany()"> + Add Company</button>
+
+    <div class="table-block">
+        <div class="col-12 ">
+            <h2 class="col-md-6">Company Request</h2>
+            <p-table [value]="companyDetails" styleClass="p-datatable-striped" [tableStyle]="{ 'min-width': '55rem' }"
+                [paginator]="true" [rows]="10">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-company>
+                    <tr>
+                        <td style="width:27%">{{ company.t5_company_name }}</td>
+                        <td style="width:27%">{{ company.t5_city }}</td>
+                        <td style="width:27%">{{ company.t5_email }}</td>
+                        <td style="width:15%">
+                            <p-tag [value]="company.t5_approved === 'y' ? 'Approved' : (company.t5_approved === 'n' ? 'Rejected' : 'Pending')" [rounded]="true"
+                                severity="{{company.t5_approved === 'y' ? 'success' : (company.t5_approved === 'n' ? 'danger' : 'warning')}}">
+                            </p-tag>
+                        </td>
+                        <td style="width:4%"><button (click)="onViewDetails(company)" class="button-4"
+                                role="button">View</button></td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+</div>
+
+
+
+<!--  PopUp -->
+
+
+<p-dialog [(visible)]="PopUpVisible" [modal]="true"
+    [style]="{ 'width': '55rem','padding':'0px 20px 0px 20px','box-shadow':'none'}" [draggable]="false"
+    [resizable]="false">
+    <div>
+        <p-toast></p-toast>
+        <h3 class="text-center mb-4">Company Details</h3>
+     
+        <form class="row g-3" [formGroup]="companyRegForm">
+            <div class="col-md-12">
+                <label class="form-label">Company Name</label>
+                <input type="text" class="form-control" formControlName="companyname"
+                    [(ngModel)]="company.t5_company_name" name="t5_company_name" [readOnly]="isreadonly">
+                <small style="float:left;margin-top:2px;"
+                    *ngIf="companyRegForm.controls['companyname'].invalid && 
+                (companyRegForm.controls['companyname'].dirty || companyRegForm.controls['companyname'].touched) && companyRegForm.hasError('required','companyname')">*Company
+                    name is required</small>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" formControlName="email" [(ngModel)]="company.t5_email"
+                    [readOnly]="isreadonly" (click)="inputboxClick($event)">
+                <small style="float:left;margin-top:2px;"
+                    *ngIf="companyRegForm.controls['email'].invalid && 
+                    (companyRegForm.controls['email'].dirty || companyRegForm.controls['email'].touched)  && companyRegForm.hasError('required','email')">*Email
+                    is required</small>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Mobile Number</label>
+                <input type="text" class="form-control" formControlName="mobile" pattern="[0-9]*"
+                    (keypress)="onlyNumbers($event)" maxlength="10" [(ngModel)]="company.t5_mobile_no"
+                    [readOnly]="isreadonly" (click)="inputboxClick($event)">
+                <small style="float:left;margin-top:2px;"
+                    *ngIf="companyRegForm.controls['mobile'].invalid && 
+                    (companyRegForm.controls['mobile'].dirty || companyRegForm.controls['mobile'].touched)  && companyRegForm.hasError('required','mobile')">*Mobile
+                    number is required</small>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Address 1</label>
+                <input type="textarea" class="form-control" formControlName="address" [(ngModel)]="company.t5_address_1"
+                    [readOnly]="isreadonly">
+                <small style="float:left;margin-top:2px;"
+                    *ngIf="companyRegForm.controls['address'].invalid && 
+                    (companyRegForm.controls['address'].dirty || companyRegForm.controls['address'].touched)  && companyRegForm.hasError('required','address')">*Address
+                    is required</small>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Address 2 (optional)</label>
+                <input type="textarea" class="form-control" formControlName="address2"
+                    [(ngModel)]="company.t5_address_2" [readOnly]="isreadonly">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Country</label>
+                <input type="text" class="form-control" formControlName="country" [(ngModel)]="company.t5_country"
+                    [readOnly]="isreadonly">
+                <small style="float:left;margin-top:2px;"
+                    *ngIf="companyRegForm.controls['country'].invalid && 
+                    (companyRegForm.controls['country'].dirty || companyRegForm.controls['country'].touched)  && companyRegForm.hasError('required','country')">*Country
+                    is required</small>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">State</label>
+                <input type="text" class="form-control" formControlName="state" [(ngModel)]="company.t5_state"
+                    [readOnly]="isreadonly">
+                <small style="float:left;margin-top:2px;"
+                    *ngIf="companyRegForm.controls['state'].invalid && 
+                    (companyRegForm.controls['state'].dirty || companyRegForm.controls['state'].touched)  && companyRegForm.hasError('required','state')">*State
+                    is required</small>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">City/Village/Town</label>
+                <input type="text" class="form-control" formControlName="city" [(ngModel)]="company.t5_city"
+                    [readOnly]="isreadonly">
+                <small style="float:left;margin-top:2px;"
+                    *ngIf="companyRegForm.controls['city'].invalid && 
+                    (companyRegForm.controls['city'].dirty || companyRegForm.controls['city'].touched)  && companyRegForm.hasError('required','city')">*City is
+                    required</small>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">ZIP Code</label>
+                <input type="text" class="form-control" formControlName="zipcode" pattern="[0-9]*"
+                    (keypress)="onlyNumbers($event)" maxlength="10" minlength="4" [(ngModel)]="company.t5_zip_pincode"
+                    [readOnly]="isreadonly">
+                <small style="float:left;margin-top:2px;"
+                    *ngIf="companyRegForm.controls['zipcode'].invalid && 
+                    (companyRegForm.controls['zipcode'].dirty || companyRegForm.controls['zipcode'].touched) && companyRegForm.hasError('required','zipcode')">*ZIP
+                    Code is required</small>
+                <small style="float:left;margin-top:2px;" *ngIf="companyRegForm.hasError('minlength','zipcode')">*ZIP
+                    Code must be at least 4 characters long.</small>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Access From Date</label>
+                <input type="date" class="form-control" formControlName="accessFromdate"
+                    [(ngModel)]="company.t5_access_from_date">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Access To Date</label>
+                <input type="date" class="form-control" formControlName="accessTodate"
+                    [(ngModel)]="company.t5_access_till_date" >
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Maximum Users Allowed</label>
+                <input type="text" class="form-control" formControlName="maxUsers"
+                    [(ngModel)]="company.t5_max_users_allowed">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Number of Device Login</label>
+                <input type="text" class="form-control" formControlName="deviceLogin"
+                    [(ngModel)]="company.t5_max_device_login_per_username">
+            </div>
+            <div class="col-md-12" *ngIf="AddButton">
+                <button type="submit" class="btn btn-primary btn-block mt-4 w-100 "
+                    style="background: #008774; border-color: #355a64;" (click)="onSubmit()">ADD</button>
+            </div>
+            <div class="col-md-6" *ngIf="StatusButton">
+                <button type="submit" class="btn btn-primary btn-block mt-4 w-100 "
+                    style="background: #008774; border-color: #355a64;" [disabled]="buttonDisabled" (click)="updateLoginPermissionApproved()">Accept Request</button>
+            </div>
+            <div class="col-md-6" *ngIf="StatusButton">
+                <button type="submit" class="btn btn-primary btn-block mt-4 w-100"
+                    style="background: #b90404; border-color: #b90404;" (click)="updateLoginPermissionUnapproved()">Reject Request</button>
+            </div>
+
+            <div class="error_msg col-md-12" *ngIf="errorMessageView">
+                <i class="fa fa-times-circle"></i>&nbsp;{{ errorMessage }}
+            </div>
+        </form>
+    </div>
+</p-dialog>

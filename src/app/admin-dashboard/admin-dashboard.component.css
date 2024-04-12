@@ -1,0 +1,179 @@
+@import url("https://fonts.googleapis.com/css2?family=Tourney&display=swap");
+
+.card-block h2,h5{
+    color: aliceblue;
+}
+.card-block h2 img{
+  height:50px;
+}
+.card-block .card h4{
+  color: aliceblue;
+}
+p{
+    font-size: medium;
+    color: aliceblue;
+    font-weight: 500;
+}
+h5{
+  font-size: 13px;
+}
+a{
+    cursor: pointer;
+    color: #38c5b1;
+}
+.wrapper {
+    position: relative;
+    width: 100%;
+    padding: 40px 36px 0px 37px;
+  }
+
+.card-block{
+   display: flex;
+   justify-content: center;
+}
+
+.card{
+  border-radius: 5px;
+  box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+  border: none;
+  margin-bottom: 30px;
+  transition: all 0.3s ease-in-out;
+  background: linear-gradient(45deg, #00b9b0, #1a867d);
+  background-blend-mode: multiply;
+  min-height: 18vh;
+  padding: 20px;
+}
+
+.card:hover{
+    transition-duration: 150ms;
+    box-shadow: 0 5px 20px 5px #00000044;
+    transition: all .4s ease; 
+    transform: translate3D(0,-1px,0) scale(1.03);
+}
+
+.f-left {
+    float: left;
+}
+
+.f-right {
+    float: right;
+    margin-right: 10px;
+}
+
+.table-block{
+    margin:20px 0px 0px 0px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding:20px;
+    border-radius: 10px;
+}
+.table-block h2{
+    margin:9px 0px 28px 0px;
+    
+}
+.button-block{
+    display: flex;
+    justify-content: center;
+}
+
+.time{
+  font-family: "Tourney", sans-serif;
+
+}
+
+.button-4 {
+    appearance: none;
+    background-color: #FAFBFC;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+    box-sizing: border-box;
+    color: #24292E;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    list-style: none;
+    padding: 6px 16px;
+    position: relative;
+    transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+    word-wrap: break-word;
+  }
+  
+  .button-4:hover {
+    background-color: #F3F4F6;
+    text-decoration: none;
+    transition-duration: 0.1s;
+  }
+  
+  .button-4:disabled {
+    background-color: #FAFBFC;
+    border-color: rgba(27, 31, 35, 0.15);
+    color: #959DA5;
+    cursor: default;
+  }
+  
+  .button-4:active {
+    background-color: #EDEFF2;
+    box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+    transition: none 0s;
+  }
+  
+  .button-4:focus {
+    outline: 1px transparent;
+  }
+  
+  .button-4:before {
+    display: none;
+  }
+  
+  .button-4:-webkit-details-marker {
+    display: none;
+  }
+
+  .button-88 {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 0.7em 1.4em 0.7em 1.1em;
+    color: white;
+    background: #ad5389;
+    background: linear-gradient(0deg, rgb(24 139 130) 0%, rgb(3 179 170) 100%);
+    border: none;
+    box-shadow: 0 0.7em 1.5em -0.5em #168c83;
+    letter-spacing: 0.05em;
+    border-radius: 20em;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    float: right;
+  }
+  
+  .button-88:hover {
+    box-shadow: 0 0.5em 1.5em -0.5em #168c83;
+  }
+  
+  .button-88:active {
+    box-shadow: 0 0.3em 1em -0.5em #168c83;
+  }
+  
+  .error {
+    border-color: red !important;
+  }
+
+  form .error_msg {
+    padding: 10px;
+    border-radius: 6px;
+    color: #d8000c;
+    background-color: #ffbaba;
+    margin-top: 20px;
+  
+  }

@@ -1,0 +1,119 @@
+<div class="wrapper">
+    <div class="col-md-12 ml-2">
+        <span><a routerLink="/admin-dashboard" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">Home</a> /</span>
+        <span class="active-nav"> Registered Company</span>
+    </div>
+    <div class="table-block">
+        <div class="col-12 ">
+            <h2 class="col-md-6 mb-5">Company Registered</h2>
+            <p-table  [value]="companyDetails" styleClass="p-datatable-striped" [tableStyle]="{ 'min-width': '55rem' }"
+                [paginator]="true" [rows]="10">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Access From Date</th>
+                        <th>Access To Date</th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-companies>
+                    <tr>
+                        <td>{{companies.t5_company_name}}</td>
+                        <td>{{companies.t5_email}}</td>
+                        <td>{{companies.t5_mobile_no}}</td>
+                        <td>{{companies.t5_access_from_date| date:'dd-MM-yyyy'}}</td>
+                        <td>{{companies.t5_access_till_date| date:'dd-MM-yyyy'}}</td>
+                        <td >
+                            <i class='bx bxs-edit' style="font-size:25px;" (click)="onEdit(companies.id_t5_m_company)"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <i class='bx bxs-trash-alt' style="font-size:25px;" (click)="deleteCompanyById(companies.id_t5_m_company)"></i>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+<p-toast></p-toast>
+
+<p-dialog [(visible)]="PopUpVisible" [modal]="true"
+    [style]="{ 'width': '55rem','padding':'0px 20px 0px 20px','box-shadow':'none'}" [draggable]="false"
+    [resizable]="false">
+    <div>
+        <p-toast></p-toast>
+        <h3 class="text-center mb-4">Company Details</h3>
+     
+        <form class="row g-3">
+            <div class="col-md-12">
+                <label class="form-label">Company Name</label>
+                <input type="text" class="form-control" [(ngModel)]="companynew.company_name" name="company_name" >
+                
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input type="text" class="form-control" [(ngModel)]="companynew.email" name="email" (click)="inputboxClick($event)">
+                
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Mobile Number</label>
+                <input type="text" class="form-control" name="mobile" pattern="[0-9]*" (keypress)="onlyNumbers($event)" maxlength="10" [(ngModel)]="companynew.mobile_no"
+                     (click)="inputboxClick($event)">
+        
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Address 1</label>
+                <input type="textarea" class="form-control" name="address" [(ngModel)]="companynew.address_1">
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Address 2 (optional)</label>
+                <input type="textarea" class="form-control" name="address2" [(ngModel)]="companynew.address_2" >
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Country</label>
+                <input type="text" class="form-control" name="country" [(ngModel)]="companynew.country">
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">State</label>
+                <input type="text" class="form-control" name="state" [(ngModel)]="companynew.state">
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">City/Village/Town</label>
+                <input type="text" class="form-control" name="city" [(ngModel)]="companynew.city">
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">ZIP Code</label>
+                <input type="text" class="form-control" name="zipcode" pattern="[0-9]*"
+                    (keypress)="onlyNumbers($event)" maxlength="10" minlength="4" [(ngModel)]="companynew.zip_pincode">
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Access From Date</label>
+                <input type="date" class="form-control" name="accessFromdate" [ngModel]="companynew.access_from_date" readonly>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Access To Date</label>
+                <input type="date" class="form-control" name="accessTodate" [(ngModel)]="companynew.access_till_date" >
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Maximum Users Allowed</label>
+                <input type="text" class="form-control" name="maxUsers" [(ngModel)]="companynew.max_users_allowed" >
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Number of Device Login</label>
+                <input type="text" class="form-control" name="deviceLogin" [(ngModel)]="companynew.max_device_login_per_username" >
+            </div>
+
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary btn-block mt-4 w-100 "
+                    style="background: #008774; border-color: #355a64;" (click)="updateCompanyByNotetech()">UPDATE</button>
+            </div>
+       
+        </form>
+    </div>
+</p-dialog>

@@ -1,0 +1,16 @@
+.wrapper{
+    padding:92px 8px 17px 8px;
+}
+h3{
+    font-size: 40px;
+    font-family: "Montserrat", sans-serif;
+    text-shadow: -3px 3px 3px rgba(219, 219, 219, 0.5);
+    color: #018673;
+}
+.tutorial-img img{
+    border: 3px solid #0285705c;
+    border-radius: 20px;
+    margin-top: 42px;
+    margin-bottom: 40px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px -5px 58px 6px, rgba(0, 0, 0, 0.06) 0px 0px 0px 5px;
+}

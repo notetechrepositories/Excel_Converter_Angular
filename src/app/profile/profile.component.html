@@ -1,0 +1,446 @@
+<main>
+<div class="wrapper">
+    <div class="container">
+
+<!-- ======================== COMPANY USER PROFILE =========================== -->
+
+        <div class="main-body" *ngIf="Company_UserProfile_View">
+              <div class="row gutters-sm">
+                <div class="col-md-4 mb-3">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="d-flex flex-column align-items-center text-center">
+                        <img src="src/assets/images/user.png" alt="Admin" class="rounded-circle" width="150">
+                        <div class="mt-3">
+                          <h4>{{profileDetails.t6_name}}</h4>
+                          <!-- <p class="text-secondary mb-1">Full Stack Developer</p>
+                          <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-8">
+                  <div class="card mb-3">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-sm-10"><h3>Profile</h3></div>
+                            <div class="col-sm-2 " (click)="onEditProfile()">
+                                <i class="fa fa-edit" style="float: right;font-size: 20px;color: #4e4e4e;"></i>
+                            </div>
+                        </div>
+
+                      <div class="row mt-5 ">
+                        <div class="col-sm-3"><h6 class="mb-0">Name</h6></div>
+                        <div class="col-sm-9 text-secondary">{{profileDetails.t6_name}}</div>
+                      </div>
+                      <hr>
+
+                      <div class="row">
+                        <div class="col-sm-3"><h6 class="mb-0">Email</h6></div>
+                        <div class="col-sm-9 text-secondary">{{profileDetails.t6_email}}</div>
+                      </div>
+                      <hr>
+
+                      <div class="row">
+                        <div class="col-sm-3"><h6 class="mb-0">Mobile</h6></div>
+                        <div class="col-sm-9 text-secondary">{{profileDetails.t6_mobile_no}}</div>
+                      </div>
+                      <hr>
+
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Admin Privilege</h6></div>
+                          <div class="col-sm-9 text-secondary">{{profileDetails.t6_admin}}</div>
+                      </div>
+
+                    </div>
+                  </div>    
+                </div>
+              </div>
+
+<!-- -------- Company Details ------- -->
+
+              <div class="row gutters-sm">
+                <div class="col-md-4 mb-3"></div>
+                <div class="col-md-8">
+                  <div class="card mb-3">
+                    <div class="card-body">
+                        
+                        <div class="row">
+                            <h3>Company Details</h3>
+                        </div> 
+
+                      <div class="row mt-5 ">
+                        <div class="col-sm-3"><h6 class="mb-0">Company Name</h6></div>
+                        <div class="col-sm-9 text-secondary">{{profileDetails.t5_company_name}}</div>
+                      </div>
+                      <hr>
+                      
+                      <div class="row">
+                        <div class="col-sm-3"><h6 class="mb-0">Address</h6></div>
+                        <div class="col-sm-9 text-secondary">
+                            {{profileDetails.t5_address_1}},
+                            {{profileDetails.t5_address_2}}
+                        </div>
+                      </div>
+                      <hr>
+
+                      <div class="row">
+                        <div class="col-sm-3"><h6 class="mb-0">Location</h6></div>
+                        <div class="col-sm-9 text-secondary">{{profileDetails.t5_city}}</div>
+                      </div>
+                      <hr>
+
+                      <div class="row">
+                        <div class="col-sm-3"><h6 class="mb-0">Country</h6></div>
+                        <div class="col-sm-9 text-secondary">{{profileDetails.t5_country}}</div>
+                      </div>
+                      <hr>
+
+                      <div class="row">
+                        <div class="col-sm-3"><h6 class="mb-0">State</h6></div>
+                        <div class="col-sm-9 text-secondary">{{profileDetails.t5_state}}</div>
+                      </div>
+                      <hr>
+
+                      <div class="row">
+                        <div class="col-sm-3"><h6 class="mb-0">ZIP Code</h6></div>
+                        <div class="col-sm-9 text-secondary">{{profileDetails.t5_zip_pincode}}</div>
+                      </div>
+
+                    </div>
+                  </div>    
+                </div>
+              </div>
+            </div>
+
+<!-- ============================ COMPANY ADMIN PROFILE =================================-->
+
+    <div class="main-body" *ngIf="Company_AdminProfile_View">
+        <div class="row gutters-sm">
+        <div class="col-md-4 mb-3">
+            <div class="card">
+            <div class="card-body">
+                <div class="d-flex flex-column align-items-center text-center">
+                <img src="src/assets/images/user.png" alt="Admin" class="rounded-circle" width="150">
+                <div class="mt-3">
+                    <h4>{{profileDetails.t6_name}}</h4>
+                    <!-- <p class="text-secondary mb-1">Full Stack Developer</p>
+                    <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p> -->
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card mb-3">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-sm-10"><h3>Profile</h3></div>
+                    <div class="col-sm-2 " style="float: right;cursor: pointer;text-decoration: underline; color: #4e4e4e;">
+                        <i class="fa fa-edit" style="float: right;font-size: 20px;"></i>
+                    </div>
+                </div>
+
+                <div class="row mt-5 ">
+                    <div class="col-sm-3"><h6 class="mb-0">Company Name</h6></div>
+                    <div class="col-sm-9 text-secondary">{{profileDetails.t5_company_name}}</div>
+                </div>
+                <hr>
+
+                <div class="row">
+                    <div class="col-sm-3"><h6 class="mb-0">Email</h6></div>
+                    <div class="col-sm-9 text-secondary">{{profileDetails.t5_email}}</div>
+                </div>
+                <hr>
+    
+                <div class="row">
+                    <div class="col-sm-3"><h6 class="mb-0">Mobile</h6></div>
+                    <div class="col-sm-9 text-secondary">{{profileDetails.t5_mobile_no}}</div>
+                </div>
+                <hr>
+                
+                <div class="row">
+                    <div class="col-sm-3"><h6 class="mb-0">Address</h6></div>
+                    <div class="col-sm-9 text-secondary">
+                        {{profileDetails.t5_address_1}},
+                        {{profileDetails.t5_address_2}}
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row">
+                    <div class="col-sm-3"><h6 class="mb-0">Location</h6></div>
+                    <div class="col-sm-9 text-secondary">{{profileDetails.t5_city}}</div>
+                </div>
+                <hr>
+
+                <div class="row">
+                    <div class="col-sm-3"><h6 class="mb-0">Country</h6></div>
+                    <div class="col-sm-9 text-secondary">{{profileDetails.t5_country}}</div>
+                </div>
+                <hr>
+
+                <div class="row">
+                    <div class="col-sm-3"><h6 class="mb-0">State</h6></div>
+                    <div class="col-sm-9 text-secondary">{{profileDetails.t5_state}}</div>
+                </div>
+                <hr>
+
+                <div class="row">
+                    <div class="col-sm-3"><h6 class="mb-0">ZIP Code</h6></div>
+                    <div class="col-sm-9 text-secondary">{{profileDetails.t5_zip_pincode}}</div>
+                </div>
+                <hr>
+
+                <div class="row">
+                <div class="col-sm-3">
+                    <h6 class="mb-0">Admin Privilege</h6></div>
+                    <div class="col-sm-9 text-secondary">{{profileDetails.t6_admin}}</div>
+                </div>
+                <hr>
+
+                <div class="row">
+                    <div class="col-sm-3"><h6 class="mb-0">Number of Login</h6></div>
+                    <div class="col-sm-9 text-secondary">{{profileDetails.t5_max_device_login_per_username}}</div>
+                </div>
+                <hr>
+
+                <div class="row">
+                    <div class="col-sm-3"><h6 class="mb-0">Number of Users Allowed</h6></div>
+                    <div class="col-sm-9 text-secondary">{{profileDetails.t5_max_users_allowed}}</div>
+                </div>
+                
+
+            </div>
+            </div>    
+        </div>
+        </div>
+        </div>
+
+    </div>
+
+
+<!-- ============================ ADMIN PROFILE =================================-->
+
+<div class="main-body" *ngIf="AdminProfile_View">
+    <div class="row gutters-sm">
+    <div class="col-md-4 mb-3">
+        <div class="card">
+        <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+            <img src="src/assets/images/logo.jpg" alt="Admin" class="rounded-circle" width="150">
+            <div class="mt-3">
+                <h4>{{profileDetails.t6_name}}</h4>
+                <p class="text-secondary mb-1">ADMIN</p>
+                <!-- <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p> -->
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="card mb-3">
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-sm-10"><h3>Profile</h3></div>
+                <!-- <div class="col-sm-2 " style="float: right;cursor: pointer;text-decoration: underline; color: #4e4e4e;">
+                    <i class="fa fa-edit" style="float: right;font-size: 20px;"></i>
+                </div> -->
+            </div>
+
+            <div class="row mt-5 ">
+                <div class="col-sm-3"><h6 class="mb-0">Name</h6></div>
+                <div class="col-sm-9 text-secondary">{{profileDetails.t5_company_name}}</div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="col-sm-3"><h6 class="mb-0">Email</h6></div>
+                <div class="col-sm-9 text-secondary">{{profileDetails.t5_email}}</div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="col-sm-3"><h6 class="mb-0">Mobile</h6></div>
+                <div class="col-sm-9 text-secondary">{{profileDetails.t5_mobile_no}}</div>
+            </div>
+            <hr>
+            
+            <div class="row">
+                <div class="col-sm-3"><h6 class="mb-0">Address</h6></div>
+                <div class="col-sm-9 text-secondary">
+                    {{profileDetails.t5_address_1}},
+                    {{profileDetails.t5_address_2}}
+                </div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="col-sm-3"><h6 class="mb-0">Location</h6></div>
+                <div class="col-sm-9 text-secondary">{{profileDetails.t5_city}}</div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="col-sm-3"><h6 class="mb-0">Country</h6></div>
+                <div class="col-sm-9 text-secondary">{{profileDetails.t5_country}}</div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="col-sm-3"><h6 class="mb-0">State</h6></div>
+                <div class="col-sm-9 text-secondary">{{profileDetails.t5_state}}</div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="col-sm-3"><h6 class="mb-0">ZIP Code</h6></div>
+                <div class="col-sm-9 text-secondary">{{profileDetails.t5_zip_pincode}}</div>
+            </div>
+            <hr>
+
+            <!-- <div class="row">
+            <div class="col-sm-3">
+                <h6 class="mb-0">Admin Privilege</h6></div>
+                <div class="col-sm-9 text-secondary">{{profileDetails.t6_admin}}</div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="col-sm-3"><h6 class="mb-0">Number of Login</h6></div>
+                <div class="col-sm-9 text-secondary">{{profileDetails.t5_max_device_login_per_username}}</div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="col-sm-3"><h6 class="mb-0">Number of Users Allowed</h6></div>
+                <div class="col-sm-9 text-secondary">{{profileDetails.t5_max_users_allowed}}</div>
+            </div> -->
+            
+
+        </div>
+        </div>    
+    </div>
+    </div>
+    </div>
+
+</div>
+
+
+<!-- ======================= Update User POPUP ====================== -->
+
+<p-dialog [(visible)]="UserUpdateProfileVisible"  [modal]="true" [style]="{ 'width': '55rem','padding':'0px 20px 0px 20px','box-shadow':'none'}" [draggable]="false" [resizable]="false">
+    <div >
+        <p-toast></p-toast>
+        <h3 class="text-center mb-4">Profile Updation</h3> 
+        <form class="row g-3"  [formGroup]="companyUpdateForm"  (ngSubmit)="onUpdateUserProfile()">
+          
+            <div class="col-md-12">
+                <label  class="form-label">Name</label>
+                <input type="text" class="form-control" formControlName="name" (click)="inputboxClick($event)" [(ngModel)]="profileDetails.t6_name">
+                <!-- <small style="float:left;margin-top:2px;" *ngIf="companyUpdateForm.controls['name'].dirty && companyUpdateForm.hasError('required','name')">*Name is required</small> -->
+            </div>
+            <div class="col-md-12">
+                <label  class="form-label">Email</label>
+                <input type="text" class="form-control" formControlName="email" (click)="inputboxClick($event)" [(ngModel)]="profileDetails.t6_email">
+                <!-- <small style="float:left;margin-top:2px;" *ngIf="companyUpdateForm.controls['email'].touched && companyUpdateForm.hasError('required','email')">*Email is required</small> -->
+            </div>
+            <div class="col-md-12">
+                <label  class="form-label">Mobile</label>
+                <input type="text" class="form-control" formControlName="mobile" (keypress)="onlyNumbers($event)" maxlength="10" (click)="inputboxClick($event)" [(ngModel)]="profileDetails.t6_mobile_no">
+                <!-- <small style="float:left;margin-top:2px;" *ngIf="companyUpdateForm.controls['mobile'].touched && companyUpdateForm.hasError('required','mobile')">*Mobile number is required</small> -->
+            </div>
+      
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary btn-block mt-4 w-100 "
+              style="background: #008774; border-color: #355a64;">UPDATE</button>
+            </div>
+
+            <div class="error_msg col-md-12" *ngIf="errorMessageView">
+                <i class="fa fa-times-circle"></i>&nbsp;{{ errorMessage }}
+            </div>
+
+        </form>
+    </div>
+</p-dialog>
+
+<!-- ======================= Update Company POPUP ====================== -->
+
+<p-dialog [(visible)]="CompanyUpdateProfileVisible"  [modal]="true" [style]="{ 'width': '55rem','padding':'0px 20px 0px 20px','box-shadow':'none'}" [draggable]="false" [resizable]="false">
+    <div >
+        <p-toast></p-toast>
+        <h3 class="text-center mb-4">Compay Profile Updation</h3> 
+        <form class="row g-3"  [formGroup]="companyUpdateForm"  (ngSubmit)="onUpdateUserProfile()">
+          
+            <div class="col-md-12">
+                <label  class="form-label">Company Name</label>
+                <input type="email" class="form-control" formControlName="name" (click)="inputboxClick($event)" [(ngModel)]="profileDetails.t5_company_name">
+                <!-- <small style="float:left;margin-top:2px;" *ngIf="companyUpdateForm.controls['companyname'].dirty && companyUpdateForm.hasError('required','companyname')">*Name is required</small> -->
+            </div>
+
+            <div class="col-md-6">
+                <label  class="form-label">Email</label>
+                <input type="text" class="form-control" formControlName="email" (click)="inputboxClick($event)" [(ngModel)]="profileDetails.t5_email">
+                <!-- <small style="float:left;margin-top:2px;" *ngIf="companyUpdateForm.controls['email'].touched && companyUpdateForm.hasError('required','email')">*Email is required</small> -->
+            </div>
+            <div class="col-md-6">
+                <label  class="form-label">Mobile</label>
+                <input type="text" class="form-control" formControlName="mobile" (keypress)="onlyNumbers($event)" maxlength="10" (click)="inputboxClick($event)" [(ngModel)]="profileDetails.t5_mobile_no">
+                <!-- <small style="float:left;margin-top:2px;" *ngIf="companyUpdateForm.controls['mobile'].touched && companyUpdateForm.hasError('required','mobile')">*Mobile number is required</small> -->
+            </div>
+
+            <div class="col-md-6">
+                <label  class="form-label">Address 1</label>
+                <input type="text" class="form-control" formControlName="address" (click)="inputboxClick($event)" [(ngModel)]="profileDetails.t5_address_1">
+                <!-- <small style="float:left;margin-top:2px;" *ngIf="companyUpdateForm.controls['address'].touched && companyUpdateForm.hasError('required','address')">*Address is required</small> -->
+            </div>
+            <div class="col-md-6">
+                <label  class="form-label">Address 2</label>
+                <input type="text" class="form-control" formControlName="address2" (keypress)="onlyNumbers($event)" maxlength="10" (click)="inputboxClick($event)" [(ngModel)]="profileDetails.t5_address_2">
+            </div>
+
+            <div class="col-md-6">
+                <label  class="form-label">Country</label>
+                <input type="text" class="form-control" formControlName="country" (click)="inputboxClick($event)" [(ngModel)]="profileDetails.t5_country">
+                <!-- <small style="float:left;margin-top:2px;" *ngIf="companyUpdateForm.controls['country'].touched && companyUpdateForm.hasError('required','country')">*Country is required</small> -->
+            </div>
+            <div class="col-md-6">
+                <label  class="form-label">State</label>
+                <input type="text" class="form-control" formControlName="state" (keypress)="onlyNumbers($event)" maxlength="10" (click)="inputboxClick($event)" [(ngModel)]="profileDetails.t5_state">
+                <!-- <small style="float:left;margin-top:2px;" *ngIf="companyUpdateForm.controls['state'].touched && companyUpdateForm.hasError('required','state')">*State is required</small> -->
+            </div>
+
+            <div class="col-md-6">
+                <label  class="form-label">City</label>
+                <input type="text" class="form-control" formControlName="city" (click)="inputboxClick($event)" [(ngModel)]="profileDetails.t5_city">
+                <!-- <small style="float:left;margin-top:2px;" *ngIf="companyUpdateForm.controls['city'].touched && companyUpdateForm.hasError('required','city')">*City is required</small> -->
+            </div>
+            <div class="col-md-6">
+                <label  class="form-label">ZIP Code</label>
+                <input type="text" class="form-control" formControlName="zipcode" (keypress)="onlyNumbers($event)" maxlength="10" (click)="inputboxClick($event)" [(ngModel)]="profileDetails.t5_zip_pincode">
+                <!-- <small style="float:left;margin-top:2px;" *ngIf="companyUpdateForm.controls['zipcode'].touched && companyUpdateForm.hasError('required','zipcode')">*ZIP Code is required</small> -->
+            </div>
+      
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary btn-block mt-4 w-100 "
+              style="background: #008774; border-color: #355a64;">UPDATE</button>
+            </div>
+
+            <div class="error_msg col-md-12" *ngIf="errorMessageView">
+                <i class="fa fa-times-circle"></i>&nbsp;{{ errorMessage }}
+            </div>
+
+        </form>
+    </div>
+</p-dialog>
+
+
+</main>

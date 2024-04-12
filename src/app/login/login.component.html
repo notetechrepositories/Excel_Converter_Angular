@@ -1,0 +1,190 @@
+<div *ngIf="LoginangRegistration">
+  <div class="container  p-4 d-flex justify-content-center align-items-center" *ngIf="LoginPage">
+    <div class="form-container">
+      <form class="row g-3" [formGroup]="loginForm">
+        <div class="logo-login">
+          <img src="assets\images\STMlogo3.png" alt="" class="site-logo">
+        </div>
+        <div>
+          <h3 class="text-center">Login</h3>
+          <div class="col-md-12"
+            [class.error]="loginForm.controls['username'].dirty && loginForm.hasError('required','username')">
+            <label   class="form-label">Email or Phone</label>
+            <input type="text" class="form-control" formControlName="username" (click)="inputboxClick($event)" >
+          </div>
+          <small *ngIf="loginForm.controls['username'].dirty && loginForm.hasError('required','username')">*Username is required</small><br>
+          <div class="col-md-12"
+            [class.error]="loginForm.controls['password'].dirty && loginForm.hasError('required','password')">
+            <label for="inputPassword4" class="form-label">Password</label>
+            <div class="input-group">
+              <input [type]="type" class="form-control" formControlName="password" (click)="inputboxClick($event)" >
+              <span class="input-group-text" (click)="hideShowPassword()">
+                <i class="fa {{eyeIcon}}" aria-hidden="true"></i>
+              </span>
+            </div>
+            <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')">*Password is required</small>
+          </div><br>
+  
+          <div class="form-inline fr mt-2 d-flex justify-content-end">
+            <a id="forget" class="font-weight-bold " routerLink="/forgot-and-reset" (click)=" onForgot()"> Forget Password?</a>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block mt-4 w-100"
+            style="background: #008774; border-color: #355a64;"  (click)="onLogin()">Login
+          </button>
+          <div class="text-center pt-4 text-muted">Don't have Account? <a class="me-2" (click)="login()"><b>Sign Up</b></a></div>
+          <!-- <div class="bordert text-muted">
+            <div class="text-center py-2">
+              <a class="me-2"><i class="fa fa-google" aria-hidden="true" style="color: rgb(32, 32, 41);"></i></a>
+              <a class="me-2"><i class="fa fa-facebook-square" aria-hidden="true" style="color: rgb(32, 32, 41);"></i></a>
+              <a><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+            </div>
+          </div> -->
+          <div class="error_msg" *ngIf="errorMessageView">
+            <i class="fa fa-times-circle"></i>&nbsp;{{ errorMessage }}
+          </div>
+        </div>
+  
+      </form>
+    </div>
+  </div>
+  
+  
+  <div class="container mt-4 p-4 d-flex justify-content-center align-items-center" *ngIf="SignUpPage">
+    <div class="form-container">
+      <form class="row g-3" [formGroup]="signUpForm" #companyRegForm="ngForm" (ngSubmit)="onSignUpClick()">
+        <div class="logo-login">
+          <img src="assets\images\STMlogo3.png" alt="" class="site-logo">
+        </div>
+        <h3 class="text-center">Sign Up</h3>
+        <div class="col-md-12" [class.error]="signUpForm.controls['companyname'].dirty && signUpForm.hasError('required','companyname')">
+          <label   class="form-label">Company Name</label>
+          <input type="text" class="form-control" formControlName="companyname" [(ngModel)]="company.t5_company_name" name="companyName" (click)="inputboxClick($event)">
+          <small style="float:left;margin-top:2px;" *ngIf="signUpForm.controls['companyname'].dirty && signUpForm.hasError('required','companyname')">*Company name is required</small>
+        </div>
+
+        <div class="col-md-6" [class.error]="signUpForm.controls['email'].dirty && signUpForm.hasError('required','email')">
+          <label   class="form-label">Email</label>
+          <input type="email" class="form-control" formControlName="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" [(ngModel)]="company.t5_email" name="email" (click)="inputboxClick($event)" >
+          <small style="float:left;margin-top:2px;" *ngIf="signUpForm.controls['email'].dirty && signUpForm.hasError('required','email')">*Email is required</small>
+        </div>
+
+        <div class="col-md-6" [class.error]="signUpForm.controls['mobile'].dirty && signUpForm.hasError('required','mobile')">
+          <label   class="form-label">Mobile Number</label>
+          <input type="text" class="form-control" formControlName="mobile" pattern="[0-9]*" (keypress)="onlyNumbers($event)" maxlength="10" [(ngModel)]="company.t5_mobile_no"  name="mobileNumber" (click)="inputboxClick($event)">
+          <small style="float:left;margin-top:2px;" *ngIf="signUpForm.controls['mobile'].dirty && signUpForm.hasError('required','mobile')">*Mobile number is required</small>
+        </div>
+
+        <div class="col-md-6" [class.error]="signUpForm.controls['address'].dirty && signUpForm.hasError('required','address')">
+          <label   class="form-label">Address 1</label>
+          <input type="textarea" class="form-control" formControlName="address" [(ngModel)]="company.t5_address_1" name="address1" (click)="inputboxClick($event)" >
+          <small style="float:left;margin-top:2px;" *ngIf="signUpForm.controls['address'].dirty && signUpForm.hasError('required','address')">*Address is required</small>
+        </div>
+
+        <div class="col-md-6">
+          <label   class="form-label">Address 2 (optional)</label>
+          <input type="textarea" class="form-control" formControlName="address2" [(ngModel)]="company.t5_address_2" name="address2" (click)="inputboxClick($event)" >
+        </div>
+
+        <div class="col-md-6" [class.error]="signUpForm.controls['country'].dirty && signUpForm.hasError('required','country')">
+          <label   class="form-label">Country</label>
+          <input type="text" class="form-control" formControlName="country" [(ngModel)]="company.t5_Country" name="country" (click)="inputboxClick($event)" >
+          <small style="float:left;margin-top:2px;" *ngIf="signUpForm.controls['country'].dirty && signUpForm.hasError('required','country')">*Country is required</small>
+        </div>
+
+        <div class="col-md-6" [class.error]="signUpForm.controls['state'].dirty && signUpForm.hasError('required','state')">
+          <label   class="form-label">State</label>
+          <input type="text" class="form-control" formControlName="state" [(ngModel)]="company.t5_State" name="state" (click)="inputboxClick($event)" >
+          <small style="float:left;margin-top:2px;" *ngIf="signUpForm.controls['state'].dirty && signUpForm.hasError('required','state')">*State is required</small>
+        </div>
+
+        <div class="col-md-6" [class.error]="signUpForm.controls['city'].dirty && signUpForm.hasError('required','city')">
+          <label   class="form-label">City/Village/Town</label>
+          <input type="text" class="form-control" formControlName="city" [(ngModel)]="company.t5_City" name="city" (click)="inputboxClick($event)" >
+          <small style="float:left;margin-top:2px;" *ngIf="signUpForm.controls['city'].dirty && signUpForm.hasError('required','city')">*City is required</small>
+        </div>
+
+        <div class="col-md-6" [class.error]="signUpForm.controls['zipcode'].dirty && signUpForm.hasError('required','zipcode')">
+          <label class="form-label">ZIP Code</label>
+          <input type="text" class="form-control" formControlName="zipcode" pattern="[0-9]*" (keypress)="onlyNumbers($event)" maxlength="10" minlength="4" [(ngModel)]="company.t5_zip_pincode" name="pincode" (click)="inputboxClick($event)" >
+          <small style="float:left;margin-top:2px;" *ngIf="signUpForm.controls['zipcode'].dirty && signUpForm.hasError('required','zipcode')">*ZIP Code is required</small>
+          <small style="float:left;margin-top:2px;" *ngIf="signUpForm.hasError('minlength','zipcode')">*ZIP Code must be at least 4 characters long.</small>
+        </div>
+
+        <div class="col-md-6" [class.error]="signUpForm.controls['password'].dirty && signUpForm.hasError('required','password')">
+          <label for="inputPassword4" class="form-label">Password</label>
+          <div class="input-group">
+            <input [type]="type" class="form-control" formControlName="password" [(ngModel)]="company.t6_login_pin" name="loginPin" (click)="inputboxClick($event)" >
+            <span class="input-group-text" (click)="hideShowPassword()">
+              <i class="fa {{eyeIcon}}" aria-hidden="true"></i>
+            </span>
+          </div>
+          <small style="float:left;margin-top:2px;" *ngIf="signUpForm.controls['password'].dirty && signUpForm.hasError('required','password')">*Password is required</small>
+        </div>
+
+        <div class="col-md-6" [class.error]="signUpForm.controls['newpassword'].dirty && signUpForm.hasError('required','newpassword')">
+          <label for="inputPassword4" class="form-label">Confirm Password</label>
+          <div class="input-group">
+            <input type="password" class="form-control" formControlName="newpassword" (click)="inputboxClick($event)" >
+          </div>  
+          <small style="float:left;margin-top:2px;" *ngIf="signUpForm.controls['newpassword'].dirty && signUpForm.hasError('required','newpassword')">*Password is required</small>
+          <small style="float:left;margin-top:2px;" *ngIf="signUpForm.controls['newpassword'].dirty && signUpForm.controls['newpassword'].value && signUpForm.hasError('mismatch', 'newpassword')">Passwords do not match</small>
+          <small style="float:left;margin-top:2px;" class="text-success" *ngIf="!signUpForm.hasError('required','newpassword') && !signUpForm.hasError('mismatch', 'newpassword') && signUpForm.controls['newpassword'].dirty && signUpForm.controls['newpassword'].valid && signUpForm.controls['password'].value">Passwords match</small>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block mt-5 w-100"
+          style="background: #008774; border-color: #355a64;">Sign Up</button>
+
+        <div class="text-center pt-4 text-muted">Already have Account? <a class="me-2" (click)="signUp()"><b>Login</b></a></div>
+
+        <div class="error_msg" *ngIf="errorMessageView">
+          <i class="fa fa-times-circle"></i>&nbsp;{{ errorMessage }}
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="form-container" *ngIf="ResetPin">
+  <h3 class="text-center">Reset Password</h3>
+          <form class="row g-3" [formGroup]="resetForm" (ngSubmit)="resetpin()">
+            <div>
+                <div class="col-md-12" [class.error]="resetForm.controls['password'].dirty && resetForm.hasError('required','password')">
+                    <label for="inputPassword4" class="form-label">Password</label>
+                    <div class="input-group">
+                      <input [type]="type" class="form-control" formControlName="password" name="t6_login_pin" (click)="inputboxClick($event)" >
+                      <span class="input-group-text" (click)="hideShowPassword()">
+                        <i class="fa {{eyeIcon}}" aria-hidden="true"></i>
+                      </span>
+                    </div>
+                    <small style="float:left;margin-top:2px;" *ngIf="resetForm.controls['password'].dirty && resetForm.hasError('required','password')">*Password is required</small>
+                  </div>
+          
+                  <div class="col-md-12" [class.error]="resetForm.controls['newpassword'].dirty && resetForm.hasError('required','newpassword')">
+                    <label for="inputPassword4" class="form-label">Confirm Password</label>
+                    <div class="input-group">
+                      <input type="password" class="form-control" formControlName="newpassword" (click)="inputboxClick($event)" >
+                    </div>  
+                    <small style="float:left;margin-top:2px;" *ngIf="resetForm.controls['newpassword'].dirty && resetForm.hasError('required','newpassword')">*Password is required</small>
+                    <small style="float:left;margin-top:2px;" *ngIf="resetForm.controls['newpassword'].dirty && resetForm.controls['newpassword'].value && resetForm.hasError('mismatch', 'newpassword')">Passwords do not match</small>
+                    <small style="float:left;margin-top:2px;" class="text-success" *ngIf="!resetForm.hasError('required','newpassword') && !resetForm.hasError('mismatch', 'newpassword') && resetForm.controls['newpassword'].dirty && resetForm.controls['newpassword'].valid && resetForm.controls['password'].value">Passwords match</small>
+                  </div>
+                  
+              <button type="submit" class="btn btn-primary btn-block mt-4 w-100"
+                style="background: #008774; border-color: #355a64;">Submit
+              </button>
+            </div>
+          </form>
+</div>
+
+<div *ngIf="ForgotAndReset">
+  <app-forgot-and-reset></app-forgot-and-reset>
+</div>
+
+<div class="progress-spinner" *ngIf="isLoading">
+  <p-progressSpinner></p-progressSpinner>
+</div>
+
+
+
